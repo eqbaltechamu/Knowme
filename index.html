@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mohammad Eqbal — Healthcare IT Specialist</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #0B1C2E;
+    --navy2:  #112540;
+    --teal:   #0EA5A0;
+    --teal2:  #0CC8C2;
+    --white:  #F4F8FB;
+    --grey:   #8CA0B4;
+    --light:  #DCE8F0;
+    --card:   #132d46;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 5%;
+    background: rgba(11,28,46,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(14,165,160,0.15);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem; font-weight: 800;
+    color: var(--teal);
+    letter-spacing: 0.04em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--light);
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em;
+    text-transform: uppercase; transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 5%; padding-top: 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-eyebrow {
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--teal);
+    margin-bottom: 1.2rem;
+  }
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 800; line-height: 1.05;
+    color: var(--white); max-width: 780px;
+  }
+  .hero-name span { color: var(--teal); }
+  .hero-sub {
+    margin-top: 1.4rem; max-width: 580px;
+    font-size: 1.05rem; color: var(--grey); font-weight: 400;
+  }
+  .hero-cta {
+    margin-top: 2.4rem; display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn-primary {
+    padding: 0.8rem 2rem; border-radius: 4px;
+    background: var(--teal); color: var(--navy);
+    font-weight: 700; font-size: 0.9rem;
+    text-decoration: none; letter-spacing: 0.04em;
+    transition: background .2s, transform .15s;
+  }
+  .btn-primary:hover { background: var(--teal2); transform: translateY(-2px); }
+  .btn-outline {
+    padding: 0.8rem 2rem; border-radius: 4px;
+    border: 1.5px solid var(--teal); color: var(--teal);
+    font-weight: 600; font-size: 0.9rem;
+    text-decoration: none; letter-spacing: 0.04em;
+    transition: background .2s, transform .15s;
+  }
+  .btn-outline:hover { background: rgba(14,165,160,0.1); transform: translateY(-2px); }
+
+  /* Signature: ECG pulse line */
+  .ecg-wrapper {
+    position: absolute; bottom: 80px; right: 0; width: 55%; opacity: 0.18;
+    pointer-events: none;
+  }
+  .ecg-wrapper svg { width: 100%; height: auto; }
+
+  /* ── SECTION BASE ── */
+  section { padding: 6rem 5%; }
+  .section-label {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--teal);
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 800; color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .divider {
+    width: 48px; height: 3px;
+    background: var(--teal); border-radius: 2px;
+    margin-bottom: 2.4rem;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--navy2); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  .about-text p {
+    color: var(--grey); font-size: 1rem; margin-bottom: 1rem; line-height: 1.8;
+  }
+  .about-text p strong { color: var(--white); }
+  .about-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+  }
+  .stat-card {
+    background: var(--card); border-radius: 8px;
+    padding: 1.4rem 1.2rem;
+    border-left: 3px solid var(--teal);
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem; font-weight: 800; color: var(--teal);
+  }
+  .stat-label { font-size: 0.8rem; color: var(--grey); margin-top: 0.2rem; }
+
+  /* ── EXPERIENCE ── */
+  #experience { }
+  .timeline { display: flex; flex-direction: column; gap: 2rem; }
+  .exp-card {
+    background: var(--card); border-radius: 10px; padding: 1.8rem;
+    border-left: 3px solid var(--teal);
+    transition: transform .2s;
+  }
+  .exp-card:hover { transform: translateX(4px); }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.4rem; }
+  .exp-role { font-size: 1.05rem; font-weight: 700; color: var(--white); }
+  .exp-period {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+    color: var(--teal); background: rgba(14,165,160,0.1);
+    padding: 0.2rem 0.7rem; border-radius: 20px; white-space: nowrap;
+  }
+  .exp-company { font-size: 0.88rem; color: var(--teal); margin-bottom: 0.8rem; font-weight: 500; }
+  .exp-points { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+  .exp-points li {
+    font-size: 0.88rem; color: var(--grey); padding-left: 1rem; position: relative; line-height: 1.6;
+  }
+  .exp-points li::before {
+    content: '›'; position: absolute; left: 0; color: var(--teal); font-weight: 700;
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--navy2); }
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;
+  }
+  .skill-card {
+    background: var(--card); border-radius: 8px; padding: 1.6rem;
+    border-top: 2px solid var(--teal);
+    transition: transform .2s;
+  }
+  .skill-card:hover { transform: translateY(-4px); }
+  .skill-icon { font-size: 1.6rem; margin-bottom: 0.8rem; }
+  .skill-cat {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--teal); margin-bottom: 0.5rem;
+  }
+  .skill-card h3 { font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 0.8rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag {
+    font-size: 0.72rem; font-weight: 500; padding: 0.25rem 0.6rem;
+    border-radius: 3px; background: rgba(14,165,160,0.12); color: var(--teal);
+  }
+
+  /* ── CERTIFICATIONS ── */
+  #certifications { }
+  .cert-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem;
+  }
+  .cert-card {
+    background: var(--card); border-radius: 8px; padding: 1.2rem 1.4rem;
+    display: flex; align-items: center; gap: 1rem;
+    border-left: 3px solid var(--teal);
+  }
+  .cert-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .cert-name { font-size: 0.88rem; font-weight: 600; color: var(--white); }
+  .cert-issuer { font-size: 0.75rem; color: var(--grey); margin-top: 0.2rem; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--navy2); }
+  .contact-inner { max-width: 600px; }
+  .contact-inner p { color: var(--grey); margin-bottom: 2rem; font-size: 1rem; line-height: 1.7; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.4rem; border-radius: 8px;
+    background: var(--card);
+    border-left: 3px solid var(--teal);
+    text-decoration: none; color: var(--white);
+    transition: background .2s, transform .15s;
+  }
+  .contact-item:hover { background: #1a3a56; transform: translateX(4px); }
+  .contact-item-icon { font-size: 1.3rem; }
+  .contact-item-text { display: flex; flex-direction: column; }
+  .contact-item-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal); }
+  .contact-item-val { font-size: 0.95rem; font-weight: 500; color: var(--white); margin-top: 0.1rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem 5%; border-top: 1px solid rgba(255,255,255,0.07);
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+    gap: 1rem; font-size: 0.8rem; color: var(--grey);
+  }
+  footer span { color: var(--teal); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .ecg-wrapper { display: none; }
+    .nav-links { gap: 1rem; }
+    nav { padding: 1rem 4%; }
+    .exp-header { flex-direction: column; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Mohammad Eqbal</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-eyebrow">Healthcare IT Specialist · Erlangen, Germany</p>
+  <h1 class="hero-name">Mohammad<br><span>Eqbal</span></h1>
+  <p class="hero-sub">A Healthcare IT Specialist with over 17 years of experience delivering enterprise-grade solutions across EMEA, APAC, and North America — with deep expertise in PACS, Advanced Visualisation, and clinical workflow systems.</p>
+  <div class="hero-cta">
+    <a href="#experience" class="btn-primary">View Experience</a>
+    <a href="#contact" class="btn-outline">Get In Touch</a>
+  </div>
+
+  <!-- ECG signature element -->
+  <div class="ecg-wrapper">
+    <svg viewBox="0 0 900 200" xmlns="http://www.w3.org/2000/svg">
+      <polyline
+        points="0,100 80,100 120,100 150,95 160,30 170,160 185,80 200,100 280,100 320,100 355,95 365,20 375,170 390,75 405,100 480,100 520,100 555,95 565,20 575,170 590,75 605,100 680,100 720,100 755,95 765,20 775,170 790,75 805,100 900,100"
+        stroke="#0EA5A0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"
+      />
+    </svg>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">About Me</p>
+  <h2 class="section-title">Professional Summary</h2>
+  <div class="divider"></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>A seasoned <strong>Healthcare IT Specialist</strong> with over 17 years of experience in system implementation, technical support, and customer success for enterprise healthcare solutions across the EMEA, APAC, and North America regions.</p>
+      <p>My core expertise encompasses <strong>PACS, Advanced Visualisation, and clinical workflow systems</strong>. I am dedicated to empowering healthcare providers with reliable, secure, and innovative solutions that drive measurable operational excellence.</p>
+      <p>With a strong foundation in <strong>team leadership, process optimisation, and cross-regional project management</strong>, I have consistently transformed complex healthcare IT environments into high-performing ecosystems. I am currently furthering my expertise through a Post Graduate Certificate in Product Management at the <strong>Kellogg School of Management, Northwestern University</strong>.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card">
+        <div class="stat-num">17+</div>
+        <div class="stat-label">Years in Healthcare IT</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Global Regions: EMEA, APAC & North America</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Certifications & Awards</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Major Employers (Siemens, Philips…)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">Career</p>
+  <h2 class="section-title">Professional Experience</h2>
+  <div class="divider"></div>
+  <div class="timeline">
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-role">Implementation Engineer</div>
+        <div class="exp-period">Sep 2025 – Present</div>
+      </div>
+      <div class="exp-company">Siemens Healthineers AG · Erlangen, Germany</div>
+      <ul class="exp-points">
+        <li>Implementing Vendor Neutral Archive (VNA) solutions to enable secure, long-term clinical image storage and seamless cross-system interoperability.</li>
+        <li>Deploying and configuring the AI Orchestrator platform to integrate AI-driven workflows into clinical environments at enterprise scale.</li>
+        <li>Implementing MR and CT Protocol Manager to standardise and optimise imaging acquisition protocols across radiology departments.</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-role">Remote Services Specialist — EMEA</div>
+        <div class="exp-period">Sep 2021 – Aug 2025</div>
+      </div>
+      <div class="exp-company">Siemens Healthcare LLC · Dubai, UAE</div>
+      <ul class="exp-points">
+        <li>Delivered remote technical support and implementation services for healthcare IT products to clients across the EMEA region.</li>
+        <li>Collaborated closely with HSC, R&D, and DevOps teams to communicate customer feedback and contribute to continuous product improvement.</li>
+        <li>Authored and maintained technical documentation and knowledge-base articles, enhancing team efficiency and operational consistency.</li>
+        <li>Planned and executed system updates and version upgrades for Syngo.via, Syngo.plaza, and associated platforms with minimal disruption to clinical operations.</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-role">Remote Services Specialist & Technical Lead</div>
+        <div class="exp-period">Jan 2017 – Aug 2021</div>
+      </div>
+      <div class="exp-company">Siemens Healthcare Pvt. Ltd · Asia Pacific</div>
+      <ul class="exp-points">
+        <li>Served as Key Expert for Enterprise PACS and spearheaded the India-based remote support team, overseeing service delivery across the APAC region.</li>
+        <li>Led, mentored, and developed a team of six technical specialists, fostering a high-performance culture and ensuring consistent service excellence.</li>
+        <li>Managed the planning and execution of software hotfix updates and version upgrades for critical healthcare IT products.</li>
+        <li>Functioned as the primary technical liaison between customers and development teams, ensuring swift resolution of complex issues and maintaining high service-level standards.</li>
+        <li>Delivered remote support services across APAC for PACS, Advanced Visualisation, and HL7 integration platforms.</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-role">Lead Technical Support Engineer</div>
+        <div class="exp-period">Mar 2016 – Dec 2016</div>
+      </div>
+      <div class="exp-company">Philips Electronics India Pvt. Ltd · Bengaluru (Supporting North America, EMEA & APAC)</div>
+      <ul class="exp-points">
+        <li>Provided L1 technical support for IntelliSpace PACS across North America, Canada, and international markets including EMEA and APAC, ensuring optimal system uptime and a high standard of client service.</li>
+        <li>Delivered structured onboarding training to newly joined team members, enabling rapid integration and productivity.</li>
+        <li>Conducted root cause analyses for recurring issues and partnered with the L0 monitoring team to implement proactive resolutions.</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="exp-role">Lead Customer Support / Implementation Engineer</div>
+        <div class="exp-period">Nov 2009 – Feb 2016</div>
+      </div>
+      <div class="exp-company">Siemens Ltd. · New Delhi / Gurgaon</div>
+      <ul class="exp-points">
+        <li>Led a team of ten engineers in the deployment, configuration, and ongoing support of PACS platforms including Syngo.via, Syngo.plaza, MLR, MagicLinkA, and Teamplay.</li>
+        <li>Maintained high system availability, managed support ticket queues, and delivered comprehensive end-user training for new system implementations.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Expertise</p>
+  <h2 class="section-title">Technical Skills</h2>
+  <div class="divider"></div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">🏥</div>
+      <div class="skill-cat">Clinical Systems</div>
+      <h3>PACS & Imaging</h3>
+      <div class="tags">
+        <span class="tag">Syngo.via</span><span class="tag">Syngo.plaza</span>
+        <span class="tag">IntelliSpace PACS</span><span class="tag">Teamplay</span>
+        <span class="tag">Virtual Cockpit</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🔗</div>
+      <div class="skill-cat">Interoperability</div>
+      <h3>Standards & Integration</h3>
+      <div class="tags">
+        <span class="tag">DICOM</span><span class="tag">HL7</span>
+        <span class="tag">IHE Profiles</span><span class="tag">MagicLinkA</span>
+        <span class="tag">Openlink</span><span class="tag">RIS MLR</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🖥️</div>
+      <div class="skill-cat">Infrastructure</div>
+      <h3>Servers & Virtualisation</h3>
+      <div class="tags">
+        <span class="tag">Windows Server</span><span class="tag">RHEL</span>
+        <span class="tag">VMware ESX</span><span class="tag">VMware vSphere</span>
+        <span class="tag">Kubernetes</span><span class="tag">MS Failover Clustering</span>
+        <span class="tag">HP / Fujitsu / EMC</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📊</div>
+      <div class="skill-cat">Data</div>
+      <h3>Databases & Networking</h3>
+      <div class="tags">
+        <span class="tag">MS SQL Server</span><span class="tag">LAN/WAN</span>
+        <span class="tag">TCP/IP</span><span class="tag">Active Directory</span>
+        <span class="tag">DNS / DHCP</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🔒</div>
+      <div class="skill-cat">Compliance</div>
+      <h3>Security & Governance</h3>
+      <div class="tags">
+        <span class="tag">HIPAA</span><span class="tag">GDPR</span>
+        <span class="tag">STIGs</span><span class="tag">IIS</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🤝</div>
+      <div class="skill-cat">Leadership</div>
+      <h3>Management & Strategy</h3>
+      <div class="tags">
+        <span class="tag">ITIL V3</span><span class="tag">SAFe PO/PM</span>
+        <span class="tag">Cross-regional Teams</span><span class="tag">Product Management</span>
+        <span class="tag">AWS / Azure Basics</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-label">Academic Background</p>
+  <h2 class="section-title">Education</h2>
+  <div class="divider"></div>
+  <div class="cert-grid">
+    <div class="cert-card">
+      <div class="cert-icon">🎓</div>
+      <div>
+        <div class="cert-name">Post Graduate Certificate in Product Management</div>
+        <div class="cert-issuer">Kellogg School of Management, Northwestern University (In Progress)</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🎓</div>
+      <div>
+        <div class="cert-name">AI for Healthcare</div>
+        <div class="cert-issuer">National University of Singapore</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🎓</div>
+      <div>
+        <div class="cert-name">B.E. Electronics & Communication Engineering</div>
+        <div class="cert-issuer">Jamia Millia Islamia University, New Delhi</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🎓</div>
+      <div>
+        <div class="cert-name">Diploma in Electronics Engineering</div>
+        <div class="cert-issuer">Aligarh Muslim University, Aligarh, U.P.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications" style="background: var(--navy2);">
+  <p class="section-label">Credentials</p>
+  <h2 class="section-title">Certifications & Awards</h2>
+  <div class="divider"></div>
+  <div class="cert-grid">
+    <div class="cert-card">
+      <div class="cert-icon">✅</div>
+      <div>
+        <div class="cert-name">SAFe Product Owner / Product Manager</div>
+        <div class="cert-issuer">Scaled Agile</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🛠️</div>
+      <div>
+        <div class="cert-name">ITIL V3 Foundation</div>
+        <div class="cert-issuer">AXELOS</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🪟</div>
+      <div>
+        <div class="cert-name">Windows Server Management & Security</div>
+        <div class="cert-issuer">University of Colorado / Coursera</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🐧</div>
+      <div>
+        <div class="cert-name">Linux Server Management & Security</div>
+        <div class="cert-issuer">University of Colorado / Coursera</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🗄️</div>
+      <div>
+        <div class="cert-name">Microsoft SQL Server</div>
+        <div class="cert-issuer">Udemy</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🔐</div>
+      <div>
+        <div class="cert-name">Computer Security & Systems Management</div>
+        <div class="cert-issuer">University of Colorado / Coursera</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🏆</div>
+      <div>
+        <div class="cert-name">Star Award & Best Newcomer Award</div>
+        <div class="cert-issuer">Siemens Ltd. (2010 & 2014)</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🏆</div>
+      <div>
+        <div class="cert-name">Pat on Back Award & Good Documentation Practices Award</div>
+        <div class="cert-issuer">Siemens Healthcare (2018)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Get In Touch</p>
+  <h2 class="section-title">Let's Connect</h2>
+  <div class="divider"></div>
+  <div class="contact-inner">
+    <p>Currently based in Erlangen, Germany, I am open to senior Healthcare IT roles, implementation projects, and product management opportunities within the digital health sector. I would be delighted to explore how my expertise can add value to your organisation.</p>
+    <div class="contact-links">
+      <a href="mailto:eqbaltechamu@gmail.com" class="contact-item">
+        <span class="contact-item-icon">✉️</span>
+        <div class="contact-item-text">
+          <span class="contact-item-label">Email</span>
+          <span class="contact-item-val">eqbaltechamu@gmail.com</span>
+        </div>
+      </a>
+
+      <a href="https://linkedin.com/in/mdeqbal" target="_blank" class="contact-item">
+        <span class="contact-item-icon">💼</span>
+        <div class="contact-item-text">
+          <span class="contact-item-label">LinkedIn</span>
+          <span class="contact-item-val">linkedin.com/in/mdeqbal</span>
+        </div>
+      </a>
+      <a href="#" class="contact-item">
+        <span class="contact-item-icon">📍</span>
+        <div class="contact-item-text">
+          <span class="contact-item-label">Location</span>
+          <span class="contact-item-val">Erlangen, Germany</span>
+
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2025 Mohammad Eqbal. All rights reserved.</div>
+  <div>Healthcare IT · <span>EMEA, APAC & North America</span> · Erlangen, Germany</div>
+</footer>
+
+</body>
+</html>
