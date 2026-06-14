@@ -232,13 +232,84 @@
   }
   footer span { color: var(--teal); }
 
+  /* ── HAMBURGER MENU ── */
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; padding: 4px; background: none; border: none;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--light); border-radius: 2px;
+    transition: all .3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
   /* ── RESPONSIVE ── */
+
+  /* Large desktop */
+  @media (min-width: 1200px) {
+    section { padding: 7rem 8%; }
+    nav { padding: 1.1rem 8%; }
+    #hero { padding: 0 8%; padding-top: 80px; }
+  }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-stats { grid-template-columns: repeat(4, 1fr); }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .cert-grid { grid-template-columns: repeat(2, 1fr); }
+    .nav-links { gap: 1.2rem; }
+    .nav-links a { font-size: 0.78rem; }
+  }
+
+  /* Mobile */
   @media (max-width: 768px) {
-    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    /* Nav */
+    .hamburger { display: flex; }
+    .nav-links {
+      display: none; flex-direction: column;
+      position: absolute; top: 100%; left: 0; width: 100%;
+      background: rgba(11,28,46,0.98);
+      padding: 1.5rem 5%; gap: 1.2rem;
+      border-bottom: 1px solid rgba(14,165,160,0.15);
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { font-size: 0.95rem; }
+    nav { padding: 1rem 5%; position: relative; }
+
+    /* Hero */
+    #hero { padding: 0 5%; padding-top: 100px; min-height: auto; padding-bottom: 4rem; }
     .ecg-wrapper { display: none; }
-    .nav-links { gap: 1rem; }
-    nav { padding: 1rem 4%; }
-    .exp-header { flex-direction: column; }
+    .hero-cta { flex-direction: column; }
+    .btn-primary, .btn-outline { text-align: center; }
+
+    /* Sections */
+    section { padding: 4rem 5%; }
+
+    /* About */
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .about-stats { grid-template-columns: repeat(2, 1fr); }
+    .exp-header { flex-direction: column; gap: 0.4rem; }
+
+    /* Skills & Certs */
+    .skills-grid { grid-template-columns: 1fr; }
+    .cert-grid { grid-template-columns: 1fr; }
+
+    /* Contact */
+    .contact-item { padding: 0.9rem 1rem; }
+
+    /* Footer */
+    footer { flex-direction: column; text-align: center; }
+  }
+
+  /* Small mobile */
+  @media (max-width: 400px) {
+    .about-stats { grid-template-columns: repeat(2, 1fr); }
+    .hero-name { font-size: 2.4rem; }
+    .stat-num { font-size: 1.6rem; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -251,13 +322,16 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo">Mohammad Eqbal</div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#certifications">Certifications</a></li>
-    <li><a href="#contact">Contact</a></li>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about" onclick="closeMenu()">About</a></li>
+    <li><a href="#experience" onclick="closeMenu()">Experience</a></li>
+    <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+    <li><a href="#education" onclick="closeMenu()">Education</a></li>
+    <li><a href="#certifications" onclick="closeMenu()">Certifications</a></li>
+    <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
   </ul>
 </nav>
 
@@ -603,5 +677,19 @@
   <div>Healthcare IT · <span>EMEA, APAC & North America</span> · Erlangen, Germany</div>
 </footer>
 
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+  }
+</script>
 </body>
 </html>
